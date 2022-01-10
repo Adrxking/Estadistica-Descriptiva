@@ -1,0 +1,73 @@
+---
+title: "DocumentacionDeTexto"
+author: "Adrian Vitys"
+date: "28/12/2021"
+output:
+  pdf_document: default
+---
+
+# Titulo 1
+
+## Titulo 2
+
+### Titulo 3
+
+#### Titulo 4
+
+##### Titulo 5
+
+###### Titulo 6
+
+Esto es un texto llano. Podemos escribir sin ningún problema todo el texto que 
+queramos para acompañar a tanto el código en `R` como las fórmulas en \LaTeX
+
+*Cursiva* o también _Cursiva_
+
+**Negrita** o también __Negrita__
+
+Superindices^Adrian^.
+
+~~Tachar palabras~~
+
+Para conocer más de Adrian, visitar [Mi Web](https://adrianstudio.es)
+
+endash: -- Y entonces Adrian dijo ...
+
+emdash: ... ---  como Adrian quería explicar.
+
+elipsis: ...
+
+ecuaciones en línea $S = \pi\cdot r^2$.
+
+imagen ![Mi imagen](Chunks.pdf)
+
+
+*** 
+
+Barra divisoria
+
+> Esto es una cita en bloque
+
+### Listas no ordenadas
+
+* Item primero
+* Item segundo
+    + Sub ítem 2.1
+    + Sub ítem 2.2
+    + Sub ítem 2.3
+* Item tercero
+
+### Listas ordenadas
+
+1. Primer ítem
+2. Segundo ítem
+    + Sub ítem 2.1
+    + Sub ítem 2.2
+3. Tercer ítem
+1. Cuarto ítem
+1. Quinto ítem
+
+Alumno          |   Nota      |   Edad
+----------------|-------------|---------
+Adrian Vitys    |   10        |   19
+Carmen Fernandez|   9         |   17

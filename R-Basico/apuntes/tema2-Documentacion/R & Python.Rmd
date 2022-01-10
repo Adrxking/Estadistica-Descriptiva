@@ -1,0 +1,52 @@
+---
+title: "R & Python"
+author: "Adrian Vitys"
+date: "9/1/2022"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Reticulate
+### Paquete para Python y R
+```{r}
+library(reticulate)
+os <- import("os")
+os$listdir(".")
+```
+
+### Con la instrucción siguiente podemos importar funciones de otros archivos python
+```{r}
+source_python("add.py")
+add(3,4)
+```
+
+```{r}
+np <- import("numpy", convert = FALSE)
+x <- np$array(c(1:4))
+sum <- x$cumsum()
+
+print(sum)
+
+py_to_r(sum)
+
+```
+
+## Ayuda
+```{r}
+help(py_to_r)
+py_help(os$chdir)
+```
+
+## Arrays
+```{r}
+a <- np_array(c(1:10), order = "C")
+a
+```
+
+

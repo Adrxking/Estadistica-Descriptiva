@@ -1,0 +1,39 @@
+---
+title: "Chunks en R"
+author: "Adrian Vitys"
+date: "27/12/2021"
+output: pdf_document
+---
+
+Vamos a calcular $\sqrt(2) - e^{-2}$:
+```{r miPrimeraChunk, echo=TRUE, eval=TRUE, comment=NA}
+sqrt(2) - exp(-2)
+```
+
+echo=TRUE/FALSE Ver o no en el resultado cuál ha sido la instrucción.
+eval=TRUE/FALSE Evaluar el resultado o no.
+message=TRUE/FALSE Mostrar o no mensajes adicionales como por ejemplo la carga de paquetes adicionales necesarios.
+warning=TRUE/FALSE Mostrar o no los mensajes de aviso.
+comment=NA No muestra los (##) del inicio de las lineas.
+results='hide' Si se evalua pero no mostramos el resultado.
+results='markup' Si se evalua y mostramos el resultado con ## al inicio.
+results='asis' Si se evalua y mostramos el resultado tal cual.
+results='hold' Si se evalua y mostramos todos los resultados al final.
+
+Cuando queremos hacer la raíz cuadrada de dos, podemos hacerlo:
+
+- En \LaTeX: $\sqrt{2}$
+- En `R` haciendo `r sqrt(2)`
+- La frase completa: $\sqrt{2}=$ `r sqrt(2)`
+
+El número $\pi$ empieza por `r pi`.
+
+```{r prueba, results='hide', echo=FALSE}
+notas = c(3,5,7,7,9,10)
+media = mean(notas)
+n = length(notas)
+desviacion.tipica = sd(notas)
+```
+
+Este año he hecho $n=$ `r n` examenes, con una media $\overline{x}=$ `r round(media,2)`
+y una desviación tipica de $s=$ `r round(desviacion.tipica,2)`.

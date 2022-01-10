@@ -1,0 +1,15 @@
+---
+title: "Untitled"
+author: "Adrian Vitys"
+date: "27/12/2021"
+output: pdf_document
+---
+
+Matrices:
+$$\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{pmatrix}$$
+Sistemas de ecuaciones:
+$$\left.\begin{array}{l} ax+by=c\\ ex-fy=g \end{array}\right\}$$
+$$|x|=\left\{\begin{array}{rr}
+-x & \text{si }x\le 0\\
+x & \text{si }x\ge 0 \end{array}\right.
+$$
