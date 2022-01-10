@@ -1,0 +1,125 @@
+---
+title: "Tipos de Datos en R"
+author: "Adrian Vitys"
+date: "10/1/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## En R tenemos los siguientes tipos de Datos en vectores:
+logical --> (TRUE | FALSE).
+
+integer --> Números enteros.
+
+numeric --> Números reales.
+
+complex --> Números complejos.
+
+character --> Palabras.
+
+### En los vectores todos los valores deben ser del mismo tipo
+```{r}
+c(1,2,3)
+
+rep("Mates", 7)
+```
+
+### Mi fecha de nacimiento 10 veces
+```{r}
+rep(c(24, 05, 2002),10)
+```
+
+
+### Vector con entradas 16,0,1,20,1,7,88,5,1,9. Llámalo vec y modifica la cuarta entrada con fix()
+```{r}
+x <- scan()
+fix(x)
+x
+```
+
+## Progesión Aritmética
+### by es la diferencia (d)
+```{r}
+seq(1, 10, by=2)
+```
+### length.out es cuántos numeros debe tener el vector
+```{r}
+seq(2, length.out = 6, by = 4)
+```
+### Podemos construir un vector combinando diferentes tipos
+```{r}
+c(rep(pi,2), 2:5, 7)
+```
+
+### Podemos ejecutar cualquier función para todos los números de un vector
+```{r}
+x = 1:10
+x
+pi * x
+sapply(x, FUN = function(elemento){sqrt(elemento)})
+
+cuadrado = function(x){x^2}
+v = c(1,2,3,4,5,6)
+sapply(v, FUN = cuadrado)
+
+# Ordenar crecientemente
+sort(v)
+# Revertir vector
+rev(v)
+# Ordenar decrecientemente
+decreciente = function(x){
+  x <- sort(x)
+  x <- rev(x)
+  x
+}
+decreciente(v)
+sort(v, decreasing = TRUE)
+# Longitud
+length(v)
+# Máximo
+max(v)
+# Mínimo
+min(v)
+# Suma
+sum(v)
+# Producto
+prod(v)
+# Media
+mean(v)
+# Media
+sum(v)/length(v)
+# Acumulación de la suma de todas las anteriores
+cumsum(v)
+# Acumulación del producto de todas las anteriores
+cumprod(x)
+# Máximo encontrado en cada elemento del vector
+cummax(v)
+# Mínimo encontrado en cada elemento del vector
+cummin(v)
+# Diferencia entre cada elemento del vector
+diff(v)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

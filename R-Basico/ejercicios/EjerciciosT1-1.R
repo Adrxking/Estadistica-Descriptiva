@@ -1,4 +1,4 @@
-# Función que devuelve todas las operaciones básicas que se pueden realizar con dos números
+# Funcion que devuelve todas las operaciones basicas que se pueden realizar con dos numeros
 
 opBasic = function(a,b){
   print("Suma")

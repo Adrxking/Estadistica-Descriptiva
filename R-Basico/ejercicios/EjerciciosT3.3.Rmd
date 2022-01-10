@@ -1,13 +1,11 @@
 ---
 title: "Binomio de Newton"
-author: "María Santos"
-date: "30/12/2018"
-output: html_document
+author: "Adrian Vitys"
+date: "10/01/2022"
+output:
+  pdf_document: default
+  html_document: default
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # PRODUCTO NOTABLE
 
@@ -35,7 +33,7 @@ $$(a+b)^n = \sum_{k=0}^n {n\choose k}\cdot a^{n-k}\cdot b^k = {n\choose 0}\cdot 
 binomioNewton = function(a,b,n){
   cumsum(choose(n,(0:n))*a^{n-(0:n)}*b^(0:n))[n+1]
 }
-binomioNewton(2,1,2)
+binomioNewton(2,3,3)
 binomioNewton(3,4,14)
 ```
 
