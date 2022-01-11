@@ -1,0 +1,59 @@
+---
+title: "Valores NA"
+author: "Adrian Vitys"
+date: "11/1/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Comprobar si un numero es mayor que otro
+```{r}
+2^pi > pi^2
+length(1:100) > 4
+```
+
+## Añadir un valor en una posicion con numeros desconocidos anteriormente
+```{r}
+x <- 1:10
+x[length(x) + 5] = 9
+x
+```
+
+## Realizar calculos dentro de un vector con NA's
+```{r}
+# Sin los NA Eliminados
+sum(x)
+# Con los NA Eliminados
+sum(x, na.rm = TRUE)
+
+# De la siguiente forma no podemos obtener los NA
+#which(x == NA)
+# De la siguiente forma podemos obtener las posiciones de los NA
+which(is.na(x))
+# De la siguiente forma podemos obtener todos los NA
+x[which(is.na(x))]
+
+# Cambiar los NA por el valor medio del vector
+y = x
+y[is.na(y)] = mean(y, na.rm=TRUE)
+y
+
+# De la siguiente forma no podemos obtener el cumulo de la suma
+#cumsum(x, na.rm = TRUE)
+# De la siguiente forma podemos obtener el cumulo de la suma
+cumsum(x[!is.na(x)])
+# Omitir los NA
+na.omit(x)
+# Obtener de dos formas diferentes la suma de los vectores
+sum(x[!is.na(x)])
+sum(na.omit(x))
+x_clean = na.omit(x)
+x_clean
+
+# Limpiar los atributos de la variable
+attr(x_clean, "na.action") = NULL 
+x_clean
+```
+
+

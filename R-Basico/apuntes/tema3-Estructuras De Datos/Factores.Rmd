@@ -1,0 +1,37 @@
+---
+title: "Factores"
+author: "Adrian Vitys"
+date: "11/1/2022"
+output: pdf_document
+---
+
+### Los factores son como etiquetas, cada valor define un factor, por ejemplo si tenemos una lista de generos tendríamos dos niveles 
+### de factor: hombre y mujer.
+
+```{r}
+nombres = c("Juan", "Antonio", "Ricardo", "Juan", "Juan", "Maria", "Maria")
+nombres
+nombres_factor = factor(nombres)
+nombres_factor
+```
+
+## Vector con 2 niveles de factor
+```{r}
+gender = c("M", "H", "H", "M", "H", "M", "M", "M", "M", "M", "H")
+gender.fact = factor(gender)
+gender.fact
+
+# Traductir los niveles con una etiqueta y transformarlos en el vector
+gender.fact2 = factor(gender, levels = c("M", "H", "B"), labels = c("Mujer", "Hombre", "Hermafrodita"))
+gender.fact2
+# Podemos volver a cambiar estos datos
+levels(gender.fact2) = c("Femenino", "Masculino", "Híbrido")
+gender.fact2
+```
+
+## Podemos crear un factor notas con un orden de menor a mayor de los niveles
+```{r}
+notas = ordered(c(1,1,2,3,4,3,2,1,2,3), levels = c(1,2,3,4), labels = c("Suspendido", "Aprobado", "Notable", "Excelente"))
+notas
+```
+

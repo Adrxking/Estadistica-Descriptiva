@@ -159,7 +159,7 @@ z
 
 edad <- 30
 
-nombre = "Juan Gabriel"
+nombre = "Adrian Vitys"
 
 HOLA = 1
 hola = 5
