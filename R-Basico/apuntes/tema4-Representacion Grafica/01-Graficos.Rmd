@@ -1,0 +1,34 @@
+---
+title: "Graficos"
+author: "Adrian Vitys"
+date: "13/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Gráficos con la función `plot`
+
+```{r primer_plot, fig.cap="Gráfico básico sobre notas y alumnos", fig.align='center'}
+alumnos = c(1:10)
+notas = c(2,5,7,9,8,3,5,6,10,7)
+plot(alumnos, notas)
+```
+
+Si no incorporamos vector `y`, `R` nos va a tomar el parámetrox `x` como
+si fuese el vector de datos `y` : `plot(1:n, x)`
+
+```{r}
+plot(2^(1:6))
+```
+
+Si queremos representar una función $f(x)$:
+
+```{r}
+f <- function(x){sqrt(x)}
+plot(f)
+```
+
+
