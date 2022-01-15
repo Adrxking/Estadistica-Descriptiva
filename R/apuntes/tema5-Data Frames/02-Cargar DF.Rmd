@@ -1,0 +1,59 @@
+---
+title: "Cargar Data Frames"
+author: "Adrian"
+date: "14/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Leer tablas de datos local
+```{r}
+df = read.table("../../data/bulls.dat", 
+                header = FALSE,
+                col.names = c("breed", "sale_price", "shoulder",
+                          "fat_free", "percent_ff", "frame_scale",
+                          "back_fat", "sale_height", "sale_weight"),
+                sep = ""
+                
+                )
+# Header = TRUE -> Indica si tiene cabecera
+# col.names = c() -> Especificar el nombre de las columnas
+# sep = "" -> Especificar cual es el separador entre las columnas
+# dec = "." -> Especificar el signo que separa parte decimal de entera
+head(df)
+```
+
+
+
+## Leer tablas de datos desde URL
+```{r}
+df2 = read.table("http://bioinfo.uib.es/~recerca/MATIIIGMAT/NotasTestGrado/grado1.txt",
+                 col.names = c("Nota_sobre_14"))
+df2
+```
+
+
+## Mas parametros de read.table()
+stringsAsFactors = FALSE -> Prohibir la transformacion de columnas
+  de palabras en factores. Default = TRUE
+  
+## Leer diferentes tipos de archivo
+read.csv() -> importar en formato CSV
+read.xls() -> importar en formato xls (Se necesita el paquete xlsx)
+read.mtb() -> importar en formato Minitab (se necesita el paquete foreign)
+read.spss() -> importar en formato SPSS (se necesita el paquete foreign)
+
+## Exportar datos a ficheros
+write.table(df, file="") -> Exportar DF a un fichero. podemos utilizar sep y dec.
+
+```{r}
+write.table(df2, file = "../../data/notas_sobre_14.txt")
+df3 = read.table("../../data/notas_sobre_14.txt")
+df3
+```
+
+
+ 

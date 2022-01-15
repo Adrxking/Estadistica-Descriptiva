@@ -1,0 +1,101 @@
+---
+title: "03-Construir DF"
+author: "Adrian"
+date: "14/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Construyendo DF
+
+data.frame(vector_1,...,vector_n) -> Construir un DF a partir de vectores introducidos en el orden en el que queremos disponer las columnas de la tabla
+  - R Considera del mismo tipo de datos todas las entradas de una columna
+  - Las variables tomarán los nombres de los vectores. Estos nombres se pueden especificar como argumento de la forma variable = vector
+  - rownames: Especificar los identificadores de las filas
+  - stringsAsFactors para evitar la transformacion de las columnas de tipo palabra en factores
+  
+```{r}
+Algebra = c(1,2,0,5,4,6,7,5,5,8)
+Analysis = c(3,3,2,7,9,5,6,8,5,6)
+Statistics = c(4,5,4,8,8,9,6,7,9,10)
+grades = data.frame(Alg = Algebra, An = Analysis, Stat = Statistics)
+str(grades)
+```
+
+
+## Crear un DF
+
+```{r}
+gender  = c("H", "M", "M", "M", "H")
+age     = c( 23,  45,  20,  30,  18)
+family  = c(  2,   3,   4,   2,   5)
+
+# Crear un dataframe
+df = data.frame(genero = gender, edad = age, familia = family, stringsAsFactors = TRUE)
+
+# Cambiar nombre de las filas
+row.names(df) = c("P1", "P2", "P3", "P4", "P5")
+
+str(df)
+
+# names() -> cambiar los nombres de las variables
+# Cambiar el nombre de las variables de las filas y las columnas
+dimnames(df) = list(
+  c("Antonio", "Ricardo", "Adrian", "Maria", "Lucia"),
+  c("Sexo", "Años", "MiembrosFamilia")
+)
+# Añadir nueva fila con datos
+df = rbind(df, c("H", 31, 9))
+# Añadir nueva columna con datos
+df$Ingresos = c(10000,12000,15000,9000,20000,15000)
+df
+```
+
+## Cambiar tipos de datos
+```{r}
+# Cambiar a caracteres
+as.character(df$MiembrosFamilia)
+# Cambiar a enteros
+as.numeric(df$MiembrosFamilia)
+# Cambiar a factor
+as.factor(df$MiembrosFamilia)
+
+# Crear nuevo DF con un solo factor
+df_m <- df[df$Sexo=="M"]
+# Eliminar el factor "H" sobrante
+df_m = droplevels(df_m)
+str(df_m)
+```
+
+
+## Mas sobre sub-data Frames
+```{r}
+# Tidyverse
+library(tidyverse)
+# Obtener las columnas que empiezan con cierta palabra
+iris_petal = select(iris, starts_with("Petal"))
+# Obtener las columnas que terminan con cierta palabra
+iris_petal = select(iris, starts_with("Petal"))
+head(iris_petal)
+
+# Extrar del DF las filas que complen la condicion
+setosa <- subset(iris, Species == "setosa")
+# Reiniciar el nombre de las filas
+rownames(setosa) = 1:nrow(setosa)
+head(setosa, 5)
+```
+
+
+
+
+
+
+
+
+
+
+
+
