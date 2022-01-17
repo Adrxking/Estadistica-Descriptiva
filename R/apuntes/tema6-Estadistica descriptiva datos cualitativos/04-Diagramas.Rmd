@@ -1,0 +1,91 @@
+---
+title: "04-Diagramas"
+author: "Adrian"
+date: "15/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+Respuestas=factor(sample(c("Si", "No"), size = 12, replace = TRUE))
+Sexo=sample(c("H","M"), size = length(Respuestas), replace = TRUE)
+```
+
+# Diagramas
+
+## Diagrama de barras
+
+### Frecuencias absolutas
+
+
+```{r}
+barplot(table(Sexo), col=c("lightblue", "pink"), main="Diagrama de barras de\n las frecuencias absolutas\n de la variable \"sexo\"")
+```
+
+### Frecuencias relativas
+```{r}
+barplot(prop.table(table(Sexo)), main="Diagrama de barras de\n las frecuencias relativas\n de la variable \"sexo\"")
+```
+
+#### Barras en forma horizontal
+```{r}
+barplot(table(Sexo), horiz=T)
+```
+
+#### Tabla bidimensional
+```{r}
+barplot(table(Sexo,Respuestas), legend.text = T)
+barplot(table(Sexo,Respuestas), beside = T,legend.text = T)
+```
+
+
+##### Parametros de las leyendas
+```{r}
+barplot(table(Respuestas, Sexo), beside = T,names = c("Men", "Women"),
+        col=c("yellow","lightblue"), legend.text=c("No", "Yes"))
+```
+
+
+## Diagrama Circular
+```{r}
+x=sample(c(1,2,3,4,5), size = 15, replace = TRUE)
+pie(table(x), main = "Diagrama circular de la variable x")
+```
+
+## Diagrama de Mosaico
+### Bidimensional
+```{r}
+plot(table(Sexo, Respuestas), main = "Gráfico de mosaico de las variable \"Sexo\" y \"Respuestas\" ")
+```
+
+### Multidimensional
+```{r}
+plot(HairEyeColor, main = "Gráfico de mosaico de la tabla HairEyeColor", col = c( "lightblue", "pink"))
+```
+
+
+### Dividir grafico de mosaico multidimensional 
+```{r}
+vcd::cotabplot(HairEyeColor)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,102 @@
+---
+title: "05-Transformar de Tridimensional a Bidimensional"
+author: "Adrian"
+date: "16/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Juntar color de pelo y ojos sin distinguir sexo
+
+```{r}
+# Separar por sexos
+male <- HairEyeColor[,,"Male"]
+female <- HairEyeColor[,,"Female"]
+
+# Juntar los sexos en una tabla
+data <- as.table(male + female)
+data
+```
+
+### Manipulacion de datos
+```{r}
+# Cambiar nombre de los colores
+dimnames(data) = list(
+  Pelo = c("Negro", "Marron", "Pelirrojo", "Rubio"),
+  Ojos = c("Marrones", "Azules", "Pardos", "Verdes")
+)
+
+data
+```
+
+### Diagrama de mosaico
+```{r}
+plot(data, col = c("lightblue"), main = "Diagrama de mosaico")
+```
+
+### Datos numericos
+```{r}
+# Calcular numero de individuos
+sum(data)
+```
+
+### Frecuencias
+
+```{r}
+# Frecuencia absoluta
+colSums(data)
+rowSums(data)
+# Frecuencias relativas
+prop.table(colSums(data))
+prop.table(rowSums(data))
+
+# Frecuencias relativas globales
+round(prop.table(data), 3)
+# Frecuencias relativas marginales
+round(prop.table(data, margin = 1), 3)
+round(prop.table(data, margin = 2), 3)
+```
+
+
+### Diagramas de barras
+```{r}
+# Obtener el grafico de barras del color de ojos
+barplot(prop.table(colSums(data)), ylim = c(0,0.4),
+        main = "Frecuencias relativas del color de ojos",
+        col = c("burlywood4", "lightblue", "orange3", "lightgreen"))
+
+# Obtener el grafico de barras del color de ojos no apiladas
+barplot(prop.table(data, margin = 1), ylim = c(0,0.8),
+        main = "Frecuencias relativas del color de pelo segun los ojos",
+        col = c("black", "burlywood4", "red", "gold"),
+        beside = T, legend.text = T)
+
+# Obtener el grafico de barras del color de pelo no apiladas
+barplot(t(prop.table(data, margin = 2)), ylim = c(0,0.8),
+        main = "Frecuencias relativas del color de ojos segun el pelo",
+        col = c("burlywood4", "lightblue", "orange3", "lightgreen"),
+        beside = T, legend.text = T)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

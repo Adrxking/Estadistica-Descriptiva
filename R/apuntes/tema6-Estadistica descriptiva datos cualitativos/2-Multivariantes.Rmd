@@ -1,0 +1,77 @@
+---
+title: "02-Multivariantes"
+author: "Adrian"
+date: "15/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Datos Multidimensionales
+
+## Ejemplo con tres dimensiones
+
+```{r}
+ans = sample(c("Si", "No"), size = 100, replace = TRUE)
+sex = sample(c("H", "M"), size = 100, replace = TRUE)
+place = sample(c("Huercal-Overa", "Antas", "Pulpi", "Vera", "Mojacar"),         size = 100, replace = TRUE)
+
+table(sex, ans, place)
+```
+
+### Cambiar la visualizacion de los datos de table
+```{r}
+ftable(sex, ans, place)
+```
+
+### Filtrar tablas
+
+```{r}
+table(sex, ans, place)["M", "Si", "Huercal-Overa"]
+```
+
+### Frecuencias relativas
+
+```{r}
+# Frec. Relativas Globales
+prop.table(table(sex, ans, place))
+# Frec. Relativas Marginal por Lugar
+prop.table(table(sex, ans, place), margin = 3)
+# Frec. Relativas Marginal por Sexo y Pais
+prop.table(table(sex, ans, place), margin = c(1, 3))
+
+ftable(prop.table(table(sex, ans, place)))
+```
+
+## Ejemplo de color de ojos y de pelo
+
+```{r}
+HairEyeColor
+
+# Numero total de individuos
+sum(HairEyeColor) -> total
+```
+
+El total de individuos de la tabla de datos es `r total`.
+
+```{r}
+# Frecuencia marginal por sexo
+prop.table(HairEyeColor, margin = 3)
+# Frecuencia marginal por color de pelo y ojos
+prop.table(HairEyeColor, margin = c(1,2))
+```
+
+```{r}
+# Cambiar la distribucion de hair,eye,sex a sex,hair,eye
+aperm(HairEyeColor, perm = c("Sex", "Hair", "Eye"))
+```
+
+
+```{r, results='asis'}
+# Ver en formato DataFrame
+library(xtable)
+xtable(table(sex, ans))
+```
+

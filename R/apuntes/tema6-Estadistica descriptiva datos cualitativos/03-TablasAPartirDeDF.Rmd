@@ -1,0 +1,35 @@
+---
+title: "03-Tablas a partir de DF"
+author: "Adrian"
+date: "15/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tablas a partir de DF
+
+```{r}
+Beb_Energ = read.table("../../../data/EnergyDrink", header = T)
+str(Beb_Energ)
+head(Beb_Energ, 4)
+# Comprobar las variables cualitativas
+summary(Beb_Energ)
+
+# Obtener la tabla
+apply(Beb_Energ, MARGIN = 2, FUN = table)
+
+# Obtener la tabla sexo
+apply(Beb_Energ, MARGIN = 2, FUN = table)$sexo
+table(Beb_Energ$sexo)
+
+# Obtener la tabla con el sexo y el estudio
+table(Beb_Energ[c(1,3)])
+
+# Obtener la tabla de forma plana
+ftable(Beb_Energ)
+```
+
+

@@ -1,0 +1,147 @@
+---
+title: "Frecuencias"
+author: "Adrian"
+date: "15/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Tablas de contingencias - frecuencias unidimensionales
+```{r}
+# Generar un factor con Si y No con 12 datos
+Respuestas=factor(sample(c("Si", "No"), size = 12, replace = TRUE))
+Respuestas
+```
+
+```{r}
+# Añadir a la tabla una columna aunque no tenga datos
+z=factor(Respuestas, levels = c("Si", "No", "Quizas"))
+table(z)
+```
+
+```{r}
+# Obtener la tercera columna
+table(Respuestas)[1]
+# Obtener la columna con nombre "Si"
+table(Respuestas)["Si"]
+```
+
+```{r}
+# Obtener el tiple de la segunda columna
+3*table(Respuestas)[2]
+# Obtener la suma de los datos de la tabla
+sum(table(Respuestas))
+# Obtener la raiz cuadrada de cada columna
+sqrt(table(Respuestas))
+```
+
+### Obtener las Frecuencias absolutas
+
+```{r}
+table(Respuestas)
+```
+
+### Obtener las Frecuencias relativas
+
+$$f_i = \frac{n_i}{n}$$
+```{r}
+# Las dos siguientes dos equivalentes
+prop.table(table(Respuestas))
+table(Respuestas)/length(Respuestas)
+# Obtener el porcentaje
+100*prop.table(table(Respuestas))
+```
+
+### Obtener la moda
+
+```{r}
+names(which(table(Respuestas)==max(table(Respuestas))))
+
+# Funcion que calcula la moda
+moda <- function(d){
+  names(which(table(d)==max(table(d))))
+}
+
+moda(Respuestas)
+```
+
+## Tablas de contingencias - frecuencias Bidimensionales
+
+```{r}
+Sexo=sample(c("H","M"), size = length(Respuestas), replace = TRUE)
+table(Respuestas, Sexo)
+```
+
+```{r}
+# Obtener datos de tablas bidimensionales
+table(Respuestas, Sexo)[1,2]
+table(Respuestas, Sexo)["No","M"]
+```
+
+
+### Frecuencias Relativas Globales
+```{r}
+prop.table(table(Sexo, Respuestas))
+```
+
+
+### Frecuencias Relativas Marginales
+```{r}
+# Por sexo
+prop.table(table(Sexo, Respuestas), margin = 1)
+# Por Respuestas
+prop.table(table(Sexo, Respuestas), margin = 2)
+```
+
+### Obtener Todas las frecuencias con CrossTable
+```{r}
+library(gmodels)
+sex = factor(c("H","M","M","M","H","H","M","M"))
+ans = factor(c("S","N","S","S","S","N","N","S"))
+CrossTable(sex, ans, prop.chisq = FALSE)
+```
+
+### colSums y rowSums
+```{r}
+# Cantidad de No y Si
+colSums(table(Sexo, Respuestas))
+# Porcentaje de No y Si
+colSums(prop.table(table(Sexo, Respuestas)))
+# Cantidad de H y M
+rowSums(table(Sexo, Respuestas))
+# Porcentaje de H y M
+rowSums(prop.table(table(Sexo, Respuestas)))
+```
+
+### Aplicar funciones a tablas
+```{r}
+apply(table(Sexo, Respuestas), FUN = sum, MARGIN = 1)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
