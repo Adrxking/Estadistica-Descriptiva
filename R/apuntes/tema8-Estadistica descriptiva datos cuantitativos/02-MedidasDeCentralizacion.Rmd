@@ -1,0 +1,35 @@
+---
+title: "02-MedidasDeCentralizacion"
+author: "Adrian"
+date: "17/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Medidas de tendencia central
+Son las que dan un valor representativo a todas las observaciones como:
+- La media aritmetica
+- La mediana
+- La moda
+
+#### Ejemplo 1
+```{r}
+edad = c(15,18,25,40,30,29,56,40,13,27,42,23,11,26,25,32,30,40,33,29)
+
+# Ordenamos los datos por su orden natural
+sort(edad)
+
+# Obtener la media
+mean(edad)
+
+# Obtener la mediana
+median(edad)
+
+# Obtener la moda
+as.numeric(names(which(table(edad)==max(table(edad)))))
+
+```
+

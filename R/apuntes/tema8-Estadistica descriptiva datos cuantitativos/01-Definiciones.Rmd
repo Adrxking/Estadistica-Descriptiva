@@ -1,0 +1,75 @@
+---
+title: "01-Definicion"
+author: "Adrian"
+date: "17/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Datos Cuantitativos
+Son los que expresan cantidades que se representan mediante numeros. Estos se suelen clasificar en continuo y discretos.
+
+## Datos cuantitativos continuos
+Son los que si, existiese la posibilidad de medirlos con precision infinita, en principio podrian tomar todos los valores de un intervalo de la recta real.
+Ej: el peso, altura, el tiempo...
+
+## Datos cuantitativos discretos
+Son los que pueden tomar un solo conjunto contable de valores. El numer de colores de un gato, el numero de individuos que conforman la poblacion...
+
+### Oberservacion:
+Esta division es teorica. En la practica todos los datos son discretos puesto que la precision infinita no existe. Sin embargo, es necesario de vez en cuando suponer los datos de tipo continuo para asi poder utilizar tecnicas especificas en su analisis.
+
+## Frecuencias
+Con las variables cuantitativas tambien podemos utilizar las frecuencias absolutas,relativas,acumuladas y relativas acumuladas.
+
+#### Ejemplo 1
+```{r}
+edad = c(15,18,25,40,30,29,56,40,13,27,42,23,11,26,25,32,30,40,33,29)
+
+# Frecuencias absolutas
+table(edad)
+
+# Frecuencias relativas
+round(prop.table(table(edad)), 3)
+
+# Frecuencia acumulada absoluta
+cumsum(table(edad))
+
+# Frecuencia acumulada relativa
+round(cumsum(prop.table(table(edad))),3)
+```
+
+#### Ejemplo 2
+```{r}
+set.seed(162017)
+dados = sample(1:6, 25, replace = T)
+dados
+
+set.seed(NULL)
+
+# Frecuencia absoluta
+table(dados)
+# Frecuencia relativa
+round(prop.table(table(dados)),2)
+# Frecuencia absoluta acumulada
+cumsum(table(dados))
+# Frecuencia relativa acumulada
+round(cumsum(prop.table(table(dados))),2)
+
+# Todas las frecuencias en un Data Frame
+datos.df = data.frame(Puntuacion = 1:6,
+                      Fr.abs = as.vector(table(dados)),
+                      Fr.rel = as.vector(round(prop.table(table(dados)),2)),
+                      Fr.acu = as.vector(cumsum(table(dados))),
+                      Fr.racu = as.vector(round(cumsum(prop.table(table(dados))),2)))
+
+datos.df
+```
+
+
+## Tipos de tratamiento
+- Raw data
+- Clases o intervalos

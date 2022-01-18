@@ -1,0 +1,64 @@
+---
+title: "05-Medidas de dispersion"
+author: "Adrian"
+date: "17/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Medidas de Dispersion
+
+Evaluan lo dispersos que estan los datos. Algunas son:
+- Rango o recorrido: diferencia entre el maximo y el minimo de las observaciones
+
+- Rango intercuartilico: diferencia entre el tercer y primer cuartil $Q_{0.75} - Q_{0.25}$
+
+- Varianza: Se denota por $S^2$, es la media aritmetica de las diferencias al cuadrado entre los datos $x_i$ y la media aritmetica de las observaciones, $\bar{x}$
+
+- Desviacion tipica: raiz cuadrada positiva de la varianza, $s = \sqrt{s^2}$
+
+- Varianza muestral: Es la correcion de la varianza.Se denota por $\tilde{S}^2$
+
+- Desviacion tipica muestral: Raiz cuadrada positiva de la varianza muestral, $\tilde{S} = \sqrt{\tilde{S}^2}$
+
+
+## Propiedades de la varianza
+- $S^2 \geq 0$. Esto se debe a que, por definicion, es una suma de cuadrados de numeros reales.
+
+- Si $S^2 = 0$, entonces todos los datos son iguales
+
+- La varianza es la media de los cuadrados de los datos menos el cuadrado de la media aritmetica de estos
+
+## Varianza y Varianza muestral
+La diferencia entre ambas viene por la interrelacion entre la estadistica descriptiva y la inferencial.
+
+
+La desviacion tipica muestral suele aproximarse mas a la desviacion tipica real. Si queremos calcular la no muestral tendremos que multiplicar por $\frac{n-1}{n}$
+
+## Varianza y desviacion tipica
+Tanto la varianza como la desviacion tipica dan una informacion equivalente. Las unidades de la varianza estan al cuadrado, las de la desviacion tipica no.
+
+## Calculo de las medidas de dispersion
+```{r}
+x = c(6,2,3,4,6,2,6,6,4,4,1,2,2,5,3)
+# Minimo y maximo
+range(x)
+# Rango
+diff(range(x))
+# Rango intercuantilico
+IQR(x)
+# Varianza muestral
+var(x)
+# Varianza
+var(x)*(length(x)-1)/length(x)
+# Desviacion tipica muestral
+sd(x)
+# Desviacion tipica
+sd(x)*sqrt((length(x)-1)/length(x))
+
+```
+
+

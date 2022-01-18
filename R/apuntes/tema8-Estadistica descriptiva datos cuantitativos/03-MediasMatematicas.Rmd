@@ -1,0 +1,54 @@
+---
+title: "Medias en matematicas"
+author: "Adrian"
+date: "17/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Medias
+
+```{r}
+x = c( 32,45,67,43,28,17,48,95 )
+n = length(x)
+```
+
+Vamos a calcular las medias del valor `r x` que esta formado por `r n` observaciones
+
+## Media aritmetica
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$$
+
+```{r}
+sum(x)/n
+```
+
+### Media aritmetica ponderada
+Otorgar pesos a los datos dependiendo de su relevancia.
+
+$$\bar{x}_w =  \frac{\sum_{i=1}^nw_i\cdot x_i}{\sum_{i=1}^n w_i}$$
+
+```{r}
+# Pesos
+w = c(1,2,2,3,3,2,2,1)
+
+sum(w*x)/sum(w)
+```
+
+
+## Media geometrica
+$$\bar{x}_G = \left(\prod_{i=1}^n x_i\right)^1{1/n}$$
+
+```{r}
+prod(x)^(1/n)
+prod(x^(1/n))
+```
+
+## Media armonica
+
+$$\bar{x}_A = \frac{n}{\sum_{i=1}^{n}\frac{1}{x_i}}$$
+```{r}
+n/sum(1/x)
+```

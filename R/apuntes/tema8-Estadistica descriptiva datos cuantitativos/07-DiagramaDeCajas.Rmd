@@ -1,0 +1,46 @@
+---
+title: "07-Diagrama de cajas"
+author: "Adrian"
+date: "17/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Funcion boxplot()
+```{r}
+dados = sample(1:6, 25, replace = T)
+boxplot(dados, main = "Diagrama de caja")
+```
+
+```{r}
+body = read.table("../../../data/bodyfat.txt", header = T)
+boxplot(body)
+
+# Filtrar columnas
+boxplot(body[,7:9], names = c("Pecho", "Abdomen", "Cadera"))
+```
+
+## Ejemplo - Comprobar mejores insecticidas
+```{r}
+data = InsectSprays
+head(data)
+str(data)
+```
+
+```{r}
+by(data$count, data$spray, FUN = summary)
+
+# Obtener la desviacion tipica por cada tipo de spray
+aggregate(count~spray, data = data, FUN = sd)
+```
+
+```{r}
+boxplot(count~spray, data = data, col = "lightgreen",
+        xlab = "Tipo de spray", ylab = "Insectos muertos")
+```
+
+
+
