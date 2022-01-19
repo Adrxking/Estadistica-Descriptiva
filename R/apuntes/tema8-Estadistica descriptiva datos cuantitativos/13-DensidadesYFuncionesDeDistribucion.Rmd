@@ -1,0 +1,44 @@
+---
+title: "13-Densidades y funciones de distribucion"
+author: "Adrian"
+date: "19/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Campana de Gauss
+Es la densidad mas famosa. Se corresponde con una variable que sigue una distribucion normal
+
+## Histogramas de Fr relativas
+```{r}
+histRel = function(x, L) {
+  h = hist(x, breaks = L, right = F, plot = F)
+  t = round(1.1*max(max(density(x)[[2]]), h$density), 2)
+  plot(h, freq = F, col = "lightgray", 
+       main = "Histograma de Frec, rel.\n y curva de densidad estimada",
+       xaxt = "n", ylim=c(0,t), xlab="Intervalos", ylab="Densidades")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels = round(h$counts/length(x), 2), col="blue")
+  lines(density(x), col="purple", lwd = 2)
+}
+```
+
+## Histogramas de Fr relativas acumuladas
+```{r}
+histRelCum = function(x, L) {
+  h = hist(x, breaks = L, right = F, plot = F)
+  h$density = cumsum(h$counts)/length(x)
+  plot(h, freq = F, 
+       main = "Histograma de Frec, rel. acumuladas \n y curva de distribucion estimada",
+       xaxt = "n", col = "lightgray", xlab="Intervalos", ylab="Frec. rel. acumuladas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels = round(h$density, 2), col="blue")
+  dens.x = density(x)
+  dens.x$y = cumsum(dens.x$y) * (dens.x$x[2]~dens.x$x[1])
+  lines(dens.x, col="purple", lwd = 2)
+}
+```
+

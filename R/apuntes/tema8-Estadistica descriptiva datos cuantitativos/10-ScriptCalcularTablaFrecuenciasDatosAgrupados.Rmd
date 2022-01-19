@@ -1,0 +1,127 @@
+---
+title: "10-Script para calcular la tabla de frecuencias con datos agrupados"
+author: "Adrian"
+date: "19/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Frecuencias
+- La frecuencia abs de una clase sera el numero de datos originales que pertenecen a la clase.
+- La frecuencia abs acumulada de una clase sera el numero de datos que pertenecen a dicha clase o alguna de las anteriores.
+
+### Primer Forma de obtener la tabla de frecuencias
+Para cuando todas las clases son de la misma amplitud
+```{r}
+TablaFrecs = function(x,k,A,p){
+  L = min(x)-p/2+A*(0:k)
+  x_cut = cut(x, breaks = L, right = F)
+  intervals = levels(x_cut)
+  mc = (L[1]+L[2])/2+A*(0:(k-1))
+  Fr.abs = as.vector(table(x_cut))
+  Fr.rel = round(Fr.abs/length(x), 4)
+  Fr.cum.abs = cumsum(Fr.abs)
+  Fr.cum.rel = cumsum(Fr.rel)
+  tabla = data.frame(intervals, mc, Fr.abs, Fr.cum.abs, Fr.rel , Fr.cum.rel)
+  tabla
+}
+```
+
+### Segunda Forma de obtener la tabla de frecuencias
+Para cuando todas las clases no son de la misma amplitud
+```{r}
+TablaFrecs.L = function(x,L,V){
+  x_cut = cut(x, breaks = L, right = F, include.lowest=V)
+  intervals = levels(x_cut)
+  mc = (L[1:length(L)-1]+L[2:length(L)])/2
+  Fr.abs = as.vector(table(x_cut))
+  Fr.rel = round(Fr.abs/length(x), 4)
+  Fr.cum.abs = cumsum(Fr.abs)
+  Fr.cum.rel = cumsum(Fr.rel)
+  tabla = data.frame(intervals, mc, Fr.abs, Fr.cum.abs, Fr.rel, Fr.cum.rel)
+  tabla
+}
+```
+
+## Tabla de frencuencias de la longitud de petalos de iris es:
+```{r}
+petals = iris$Petal.Length
+TablaFrecs(petals, k=6, A=1, p=0.1)
+TablaFrecs.L(petals, L=1:7, V=FALSE)
+```
+
+
+## Ejemplo con todas las funciones
+```{r}
+notas = sample(1:10, 100, replace = T)
+notas
+
+# Vamos a agrupar las notas en [0,5),[5,7),[7,9),[9,10].
+# Definimos vector de extremos
+L = c(0,5,7,9,10)
+# Definimos notas1 como el resultado de la codificacion en intervalos utilizando como etiquetas los propios intervalos
+notas1 = cut(notas, breaks = L, right = F, include.lowest = T)
+notas1
+
+# Definimos las marcas de clase
+mc = (L[1:length(L)-1]+L[2:length(L)])/2
+#Definimos notas2 como el resultado de la codificacion en intervalos utilizando como etiquetas las marcas de clase (marca de clase es la media del intervalo)
+notas2 = cut(notas, breaks = L, labels = mc, right = F, include.lowest = T)
+notas2
+
+# Definimos notas3 como el resultado de la codificacion en intervalos utilizando como etiquetas la posicion ordenada del intervalo(1,2,3,4)
+notas3 = cut(notas, breaks = L, labels = F,right = F, include.lowest = T)
+notas3
+
+# Definimos notas4 como el resultado de la codificacion en intervalos utilizando como etiquetas (Susp, Aprob, Not, Exc)
+notas4 = cut(notas, breaks = L, labels = c("Susp", "Aprob", "Not", "Exc"),right = F, include.lowest = T)
+notas4
+
+
+#notas1 y notas2 han producido factores mientras que notas3 y notas4 han producido un vector
+
+# Frecuencia absoluta
+table(notas4)
+
+# Frecuencia relativa
+prop.table(table(notas4))
+
+# Frecuencia acumulada absoluta
+cumsum(table(notas4))
+
+# Frecuencia acumulada relativa
+cumsum(prop.table(table(notas4)))
+
+
+```
+
+### Obtener todo lo anterior con hist()
+```{r}
+notasHist = hist(notas, breaks = L, right = F, include.lowest = T, plot = F)
+# Frecuencia absoluta
+FAbs = notasHist$count
+# Frecuencia relativa
+FRel = prop.table(FAbs)
+# Frecuencia acumulada absoluta
+FAbsCum = cumsum(FAbs)
+# Frecuencia acumulada relativa
+FRelCum = cumsum(FRel)
+```
+
+### Crear un data frame con los datos
+```{r}
+intervalos = c("[0,5)", "[5,7)", "[7,9)", "[9,10]")
+calificacion = c("Suspenso", "Aprobado", "Notable", "Excelente")
+marcas = notasHist$mids
+tabla.Fr = data.frame(intervalos, calificacion, marcas, FAbs, FAbsCum, FRel, FRelCum)
+tabla.Fr
+```
+
+#### O usando nuestra funcion
+```{r}
+TablaFrecs.L(notas, L, T)
+```
+

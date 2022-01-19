@@ -1,0 +1,64 @@
+---
+title: "12-Histogramas de frecuencias"
+author: "Adrian"
+date: "19/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Histogramas
+La mejor manera de representar datos agrupados es con histogramas.
+
+Si todas las clases tienen la misma amplitud, las alturas son proporcionales, si no las alturas no representan correctamente las frecuencias de las clases.
+
+Eje de abscisas: Extremos de las clases, generalmente representa la frecuencia de su clase.
+
+## Representacion de Histogramas
+hist(x, breaks=..., freq=..., right=..., ...)
+- x: vector de los datos
+- breaks: vector con los extremos de los intervalos o el numero k de intervalos
+- freq = T: Default, Produce el histograma de freq abs. si los intervalos son de la misma amplitud y de Fr. rel en caso contrario
+- freq = F: Siempre Fr. Rel.
+- right: igual que en la funcion cut
+- include.lowest = T: Igual que en cut
+- plot = F: No lo dibuja pero si calcula el histograma. Su estructura es:
+  - breaks: valor de los extremos de los intervalos
+  - mids: puntos medios de los intervalos
+  - counts: vector de Fr. abs. de los intervalos
+  - density: vector de las densidades de los intervalos. Se corresponden a la altura de las barras.
+  
+### Funcion calcular histogramas de Fr. Abs completos
+```{r}
+histAbs = function(x, L) {
+  h = hist(x, breaks = L, right = F, freq = F,
+           xaxt = "n", yaxt = "n", col = "lightgray",
+           main = "Histograma de frecuencias absolutas",
+           xlab = "Intervalos y marcas de clase",
+           ylab = "Frecuencias absolutas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels = h$counts, col="purple")
+}
+# xaxt y yaxt="n" indican que la funcion no dibuje los ejes de abscisas y ordenadas
+
+# axis(i, at=...) -> Dibuja el eje correspondiente al valor de i con marcas en los lugares indicados por el vector definido mediante at.
+# i = 1, abscisas. i=2, ordenadas.
+
+```
+  
+### Funcion calcular histogramas de Fr. acumuladas Abs completos
+```{r}
+histAbsCum = function(x, L) {
+  h = hist(x, breaks = L, right = F, plot = F)
+  h$density = cumsum(h$density)
+  plot(h, freq = FALSE, xax = "n", yaxt = "n", col = "lightgray",
+       main = "Histograma de frecuencias absolutas acumuladas",
+       xlab = "Intervalos", ylab = "Frec. Abs. Acumuladas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels = cumsum(h$counts), col = "purple")
+}
+```
+
+
