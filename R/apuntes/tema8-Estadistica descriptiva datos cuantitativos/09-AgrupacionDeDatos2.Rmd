@@ -1,0 +1,35 @@
+---
+title: "09-Agrupacion de datos 2"
+author: "Adrian"
+date: "18/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Funcion cut()
+Para agrupar un vector de datos numericos y codificar sus valores con clases a las que pertenecen
+
+Sintaxis es: **cut(x, breaks=..., labels=..., right=...)**
+
+**x** es el vector numerico, la variable cuantitativa.
+**breaks** puede ser un vector numerico formado por los extremos de los intervalos. Tambien puede ser un numero k.
+**labels** es un vector con las etiquetas de los intervalos
+**right** Default True, Si right = False -> intervalos cerrados por la izquierda y abiertos por la derecha.
+**include.lowest** igualado a True y combinado con right = F hace que el ultimo intervalo sea cerrado.
+
+#### Ejemplo
+```{r}
+irisdf = iris
+
+petals = iris$Petal.Length
+irisdf$div1 = cut(petals, breaks = ceiling(sqrt(length(petals))), right = F)
+irisdf$div2 = cut(petals, breaks = c(1,2,3,4,5,6,7), right = F)
+irisdf$div3 = cut(petals, breaks = 5, right = F, labels = F)
+irisdf$div4 = cut(petals, breaks = 5, right = F, 
+    labels = c("Peq", "Norm", "Gran", "XGran", "Gigan"))
+irisdf
+```
+
