@@ -1,0 +1,147 @@
+---
+title: "01-Regresion Lineal"
+author: "Adrian"
+date: "20/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduccion a la regresion lineal
+Objetivo: Describir la relacion entre la variable independiente (x) y la variable dependiente (y).
+
+Habra que buscar una funcion y = f(x) cuya grafica se aproxime lo maximo posible a nuestros pares ordenados
+
+Esta funcion nos dara un modelo matematico de como se comportan estas observaciones.
+
+## Primera opcion
+Comprobar si satisfacen una relacion lineal:
+$y = ax + b$
+
+imponiendo que la suma de los cuadrados de las diferencias entre los valores $y_i$ y sus aproximaciones $\tilde{y_i} = ax_i + b$ sea minima.
+
+### Calcular una recta de regresion lineal
+Lo ideal es trabajar con Data Frames.
+
+```{r}
+body = read.table("../../../data/bodyfat.txt", header = T)
+head(body, 3)
+```
+
+Vamos a trabajar con las variables fat y weight
+```{r}
+body2 = body[,c(2,4)]
+names(body2) = c("Grasa", "Peso")
+str(body2)
+head(body2, 3)
+```
+
+#### Estimar una funcion lineal entre el peso y la grasa
+Es recomendable empezar con una representacion grafica.
+```{r}
+plot(body2)
+```
+
+Para calcular la recta de regresion
+```{r}
+# Modelo lineal que explica el peso en funcion de la grasa
+# Primero van las dependientes
+# Opcion 1:
+lm(body2$Peso~body2$Grasa)
+# Opcion 2:
+lm(Peso~Grasa, data = body2)
+```
+
+Ahora podemos superponer la funcion obtenida anteriormente en nuestro grafico usando abline()
+```{r}
+plot(body2)
+abline(lm(Peso~Grasa, data = body2), col = "purple")
+```
+
+### Coeficiente de determinacion
+Util para evaluar numericamente si la relacion lineal es significativa o no. Se expresa con $R^2$.
+
+Si $R^2 > 0.9$ consideraremos que es un ajuste bueno.
+
+La funcion summary aplicada a lm nos muestra los contenido de este objeto.
+Encontramos Multiple R-squared, que es el $R^2$
+
+```{r}
+# Coeficiente de determinacion
+summary(lm(Peso~Grasa, data = body2))$r.squared
+```
+
+
+### Transformaciones logaritmicas
+No siempre encontraremos dependencias lineales, tambien encontraremos otro tipo de dependencias como potencias o exponenciales.
+
+Se pueden transformar a lineales mediante un cambio de escala.
+- Escala semilogaritmica: Eje de abscisas (x) esta en escala lineal y el de ordenadas en escala logaritmica
+- Escala doble logaritmica: Ambos ejes estan en escala logaritmica
+
+Si $log(y) = ax + b$, entonces "y" sigue una ley exponencial frente a "x"
+
+Si $log(y) = log(x) + b$, entonces "y" sigue una ley potencial frente a "x"
+
+
+#### Ejemplo Transformaciones logaritmicas - Modelo Exponencial
+```{r}
+dep = c(1.2,3.6,12,36)
+ind = c(20,35,61,82)
+
+plot(ind, dep, main = "Escala lineal")
+
+plot(ind, log = "y", main = "Escala semilogaritmica")
+
+# Modelo lineal
+lm(log10(dep)~ind)
+# Coeficiente de determinacion
+summary(lm(log10(dep)~ind))$r.squared
+
+plot(ind, dep, main = "Curva de Regresion")
+curve(1.054^x*0.468, add = T, col = "purple")
+```
+
+
+#### Ejemplo Transformaciones logaritmicas - Modelo Potencial
+```{r}
+tiempo = 1:10
+gramos = c(0.097,0.709,2.698,6.928,15.242,29.944,52.902,83.903,120.612,161.711)
+
+d.f = data.frame(tiempo, gramos)
+```
+
+```{r}
+plot(d.f)
+# Escala semilogaritmica
+plot(d.f, log="y")
+# Escala doblelogaritmica
+plot(d.f, log="xy")
+
+```
+
+Obtener el modelo lineal
+```{r}
+# Modelo lineal
+lm(log10(gramos)~log10(tiempo), data = d.f)
+# Coeficiente de determinacion
+summary(lm(log10(gramos)~log10(tiempo), data = d.f))$r.squared
+```
+
+Curva de Regresion
+```{r}
+plot(d.f, main = "Curva de regresion")
+curve(x^(3.298)*0.081, add = T, col = "purple")
+```
+
+
+
+
+
+
+
+
+
+
