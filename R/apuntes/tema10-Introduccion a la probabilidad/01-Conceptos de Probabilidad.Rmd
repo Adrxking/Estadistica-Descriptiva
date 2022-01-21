@@ -1,0 +1,91 @@
+---
+title: "01-Distribuciones de Probabilidad"
+author: "Adrian"
+date: "21/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Conceptos
+- Experimento aleatorio: Efectuado en las misma condiciones puede dar lugar a resultados diferentes
+
+- Suceso elemental: Cada uno de los posible resultados del experimento aleatorio
+
+- Espacio muestral: Conjunto formado por todos los sucesos elementales del experimento aleatorio
+
+- Suceso: Subconjunto del espacio muestral.
+Ej: Sacar número par: ({2,4,6})
+
+- Suceso total o seguro: $\Omega$
+
+- Suceso vacio o imposible: $\varnothing$
+
+- Sucesos incompatibles: $A \cap B = \varnothing$
+
+### Operaciones con Sucesos
+- $A \cup B$ es el suceso union (Pertenecen a A, o a B, o a ambos)
+
+- $A \cap B$ es el suceso intersecion (Pertenecen a A y B)
+
+- $A^c$ es el suceso complementario (No pertenecen a A y B)
+
+- $A - B = A \cap B^c$ es el suceso diferencia (Pertenecen a A pero no a B)
+
+### Probabilidad
+- Probabilidad: Sea $\Omega$ el espacio muestral de un experimento aleatorio. Una probabilidad sobre $\Omega$ es una aplicacion
+$$p: P(\Omega) \rightarrow [0,1]$$
+
+- Probabilidad de suceso: Numero entre 0 y 1 que mide la expectativa de que se de este suceso
+
+### Variable aleatoria
+Una variable aleatoria puede definir sucesos, de los cuales queremos conocer la probabilidad $p$
+
+- $p(X = a) = p({\omega \in \Omega | X(\omega) = a})$
+
+- $p(X > a) = p({\omega \in \Omega | X(\omega) > a})$
+
+- $p(X \ge a) = p({\omega \in \Omega | X(\omega) \ge a})$
+
+- $p(X < b) = p({\omega \in \Omega | X(\omega) < b})$
+
+- $p(X \le b) = p({\omega \in \Omega | X(\omega) \le b})$
+
+- $p(a \le X \le b) = p({\omega \in \Omega | a \le X(\omega) \le b})$
+
+- $p(X \in A) = p({\omega \in \Omega | X(\omega) \in A})$
+
+### Funcion de distribucion
+Funcion de distribucion de la v.a.X. Es una funcion
+$$F: R \Longrightarrow [0,1]$$
+Definica por $F(x) = p(X \le x)$
+
+Sea F una funcion de distribucion de una v.a. X y digamos
+$$F(a^- = lim F(x))$$
+
+- $p(X \le a) = F(a)$
+
+- $p(X < a) = lim_{b\rightarrow a,b < a} p (X \le b) F(b) = F(a^-)$
+
+- $p(X = a) = p(X \le a) - p(X < a) = F(a) - F(a^-)$
+
+- $p(a \le X \le b) = p(X \le b) - p(X < a) = F(b) - F(a^-)$
+
+
+### Cuantiles
+Cuantil de orden p de una v.a. X es el $X_p \in R$ mas pequeño tal que $F(x_p \ge p)$. 
+La mediana es el cuantil de orden 0.5
+
+
+
+
+
+
+
+
+
+
+
+
