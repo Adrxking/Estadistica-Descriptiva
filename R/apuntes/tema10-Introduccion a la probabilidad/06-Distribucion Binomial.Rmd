@@ -1,0 +1,75 @@
+---
+title: "06-Distribucion Binomial"
+author: "Adrian Vitys"
+date: "22/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion Binomial
+Si X es v.a. que mide el "numero de exitos" y se realiza n ensayos de Bernoulli independientes entre si, diremos que X se distribuye como una binomial con parametros n y p
+$$X \sim Be(n,p)$$
+donde p es la prob de exito y q la de fracaso
+- El **dominio** de $X$ será $D_X = \{0,1,2,\dots,n\}$
+- La **función de probabilidad** vendrá dada por $$f(k) = {n\choose k}p^k(1-p)^{n-k} $$
+
+## Distribución Binomial
+
+- La **función de distribución** vendrá dada por $$F(x) = \left\{
+\begin{array}{cl}
+     0 & \text{si } x<0 
+  \\ \sum_{k=0}^xf(k) & \text{si } 0\le x<n
+  \\ 1 & \text{si } x\ge n
+\end{array}
+\right.$$
+- **Esperanza** $E(X) = np$
+- **Varianza** $Var(X) = npq$
+
+### Codigo de distribucion de Bernoulli
+- En `R` tenemos las funciones del paquete `Rlab`: 
+- dbinom(x, size, prob)
+- pbinom(q,size, prob)
+- qbinom(p, size, prob)
+- rbinom(n, size, prob) 
+donde `prob` es la probabilidad de éxito y `size` el número de ensayos del experimento.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.binom`:
+- pmf(k,n,p)
+- cdf(k,n,p)
+- ppf(q,n,p)
+- rvs(n, p, size)
+donde `p` es la probabilidad de éxito y `n` el número de ensayos del experimento.
+
+
+## Funcion de densidad
+Sea $X = Be(n = 30, p=0.6)$
+
+```{r}
+library(Rlab)
+# Variables
+n = 30
+p = 0.6
+# Probabilidad de Exito desde 0 hasta 30 veces con 30 intentos y prob 60%
+dbinom(0:n, size = n, prob = p) -> prob
+##Representacion
+plot(0:n, prob)
+
+# Probabilidad acumulada
+pbinom(0:n, size = n, prob = p) -> prob
+##Representacion
+plot(0:n, prob)
+
+# Cuartiles
+## Mediana
+qbinom(0.5, n, p)
+## Primer cuartil
+qbinom(0.25, n, p)
+
+# Generar 1000 observaciones
+rbinom(1000, n, p) -> prob
+## Representar observaciones
+hist(prob, breaks = 0:30)
+```

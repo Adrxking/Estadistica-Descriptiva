@@ -1,0 +1,79 @@
+---
+title: "05-Distribucion de Bernoulli"
+author: "Adrian Vitys"
+date: "22/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion de Bernoulli
+Si X es v.a. que mide el "numero de exitos" y se realiza un unico exprimento con posibles resultados (Exito = 1, Fracaso = 0), diremos que X se distribuye como una Bernoulli con parametro p.
+$$X \sim Be(p)$$
+
+donde p es la probabilidad d exito y q = 1 - p que es la probabilidad de fracaso.
+
+- El **dominio** de $X$ sera $X(\Omega)$ = {0,1} 
+
+- La **funcion de probabilidad** vendra dada por $$f(k) = p^k(1-p)^{1-k} = \left\{
+\begin{array}{rl}
+     p & \text{si } k=1 
+  \\ 1-p & \text{si } k=0
+  \\ 0 & \text{en cualquier otro caso}
+\end{array}
+\right.$$
+
+- La **función de distribución** vendrá dada por $$F(x) = \left\{
+\begin{array}{rl}
+     0 & \text{si } x<0 
+  \\ 1-p & \text{si } 0\le x<1
+  \\ 1 & \text{si } x\ge 1
+\end{array}
+\right.$$
+
+- **Esperanza** $E(X) = p$
+
+- **Varianza** $Var(X) = pq$
+
+
+### Codigo de distribucion de Bernoulli
+En $R$ tenemos las funciones del paquete **Rlab**:
+- **dbenr(x, prob)**
+- **pbenr(q, prob)**
+- **qbenr(p, prob)**
+- **rbenr(n, prob)**
+Donde prob es la probabilidad de exito
+
+En **Python** tenemos las funciones del paquete **scipy.stats.bernoulli**:
+- **pmf(k,p)**
+- **cdf(k,p)**
+- **ppf(q,p)**
+- **rvs(p,size)**
+Donde p es la probabilidad de exito
+
+
+## Funcion de densidad
+Sea $X = Be(p=0.7)$, la distribución que modela la probabilidad de obtener una cara usando una moneda trucada. 
+
+$$f(k) = p^k(1-p)^{1-p},\ k\in \{0,1\}$$
+```{r}
+library(Rlab)
+# Probabilidad de Fracasar
+dbern(0, prob=0.7)
+# Probabilidad de Exito
+dbern(1, prob=0.7)
+# La mediana
+qbern(0.5, prob=0.7)
+# El primer cuantil
+qbern(0.25, prob=0.7)
+# Experimento con 100 observaciones
+rbern(100, prob = 0.7) -> data
+
+# Mostrar un histograma con el experimento
+hist(data)
+```
+
+
+

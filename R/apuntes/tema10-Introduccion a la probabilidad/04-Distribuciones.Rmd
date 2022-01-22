@@ -1,0 +1,32 @@
+---
+title: "04-Distribuciones"
+author: "Adrian Vitys"
+date: "22/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribuciones en R
+Dada cualquier variable aleatoria, va, R nos ofrece 4 funciones para trabajar con ellas.
+
+- dva(x...): Funcion de densidad o de probabilidad f(x) de la v.a. para el valor x del dominio de definicion
+
+- pva(x,...): Funcion de distribucion F(x) de la v.a. para el valor x del dominio
+
+- qva(p,...): Cuantil p-ésimo de la v.a. (El valor de x más pequeño tal que $F(x) \ge p$)
+
+- rva(n,...): Generador de n observaciones siguiendo la distribucion de la v.a.
+
+## Distribuciones en Python
+Dada cualquier variable aleatoria, va, Python nos ofrece 4 funciones para trabajar con ellas.
+
+- pmf(k,...), o pdf(x,...): Funcion de probabilidad f(k) o de densidad f(x) de la v.a. para los valores x y k del dominio
+
+- cdf(x,...): Funcion de distribucion F(x) de la v.a. para el valor x del dominio
+
+- ppf(p,...): Cuantil p-ésimo de la v.a. (El valor de x más pequeño tal que $F(x) \ge p$)
+
+- rvs(size,...): Generador de size observaciones siguiendo la distribucion de la v.a.
