@@ -1,0 +1,16 @@
+---
+title: "03-Sesgo de una distribucion de probabilidad"
+author: "Adrian"
+date: "21/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Skewness
+Mide que tan simetrica o asimetrica es una distribucion en torno al valor central.
+- Distribucion positiva: Moda - Mediana - Media
+
+- Distribucion negativa: Media - Mediana - Moda
