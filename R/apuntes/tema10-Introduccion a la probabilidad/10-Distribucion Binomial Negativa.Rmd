@@ -1,0 +1,51 @@
+---
+title: "10-Distribucion Binomial Negativa"
+author: "Adrian"
+date: "25/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion Binomial Negativa
+Si X es v.a. que mide el "numero de repeticiones hasta observar los r exitos en ensayos de Bernoulli", diremos que X se distribuye como una Binomial Negativa con parametros r y p,
+$$X\sim\text{BN}(r,p)$$ 
+donde $p$ es la probabilidad de éxito
+
+- El **dominio** de $X$ será $D_X = \{r, r+1, r+2,\dots\}$
+
+- La **función de probabilidad** vendrá dada por $$f(k) = {k-1\choose r-1}p^r(1-p)^{k-r}, k\geq r$$
+ 
+- La **función de distribución** no tiene una expresión analítica. 
+
+- **Esperanza** $E(X) = \frac{r}{p}$
+
+- **Varianza** $Var(X) = r\frac{1-p}{p^2}$
+
+### Grafico
+
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+exitos = 5
+size = 20
+plot(c(rep(0,exitos),exitos:(size+exitos)), c(rep(0,exitos),dnbinom(0:size,exitos,0.5)),col = "purple", xlab = "", ylab = "", main = "Función de probabilidad de una BN(5, 0.5)")
+plot(c(rep(0,exitos),exitos:(size+exitos)), c(rep(0,exitos),pnbinom(0:size,exitos,0.5)),col = "purple", xlab = "", ylab = "", main = "Función de distribución de una BN(5, 0.5)")
+par(mfrow= c(1,1))
+```
+
+### Paqueteria
+- En `R` tenemos las funciones del paquete `Rlab`:
+- dnbinom(x, size, prop)
+- pnbinom(q, size, prop)
+- qnbinom(p, size, prop)
+- rnbinom(n, size, prop)
+donde `size` es el número de casos exitosos y `prob` la probabilidad del éxito.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.nbinom`: - pmf(k,n,p)
+- cdf(k,n,p)
+- ppf(q,n,p)
+- rvs(n,p) 
+donde `n`es el número de casos exitosos y `p` la probabilidad del éxito.
+

@@ -1,0 +1,66 @@
+---
+title: "08-Distribucion Hipergeométrica"
+author: "Adrian"
+date: "24/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion Hipergeometrica
+Consideremos el experimentro "Extrar a la vez n objetos donde hay N de tipo A y M de tipo B".
+Si X es v.a. que mide el "numero de objetos del tipo A", diremos que X se distribuye como una Hipergeometrica con parametros N,M,n.
+$$X\sim \text{H}(N,M,n)$$
+
+- El **dominio** de $X$ será $D_X = \{0,1,2,\dots,N\}$ (en general)
+
+- La **función de probabilidad** vendrá dada por $$f(k) = \frac{{N\choose k}{M\choose n-k}}{N+M\choose n}$$
+
+- La **función de distribución** vendrá dada por $$F(x) = \left\{
+\begin{array}{cl}
+     0 & \text{si } x<0 
+  \\ \sum_{k=0}^xf(k) & \text{si } 0\le x<n
+  \\ 1 & \text{si } x\ge n
+\end{array}
+\right.$$
+
+- **Esperanza** $E(X) = \frac{nN}{N+M}$ 
+
+- **Varianza** $Var(X) = \frac{nNM}{(N+M)^2}\cdot\frac{N+M-n}{N+M-1}$
+
+### Paqueteria
+- En `R` tenemos las funciones del paquete `Rlab`: 
+- dhyper(x, m, n, k)
+- phyper(q,  m, n, k)
+- qhyper(p,  m, n, k)
+- rhyper(nn,  m, n, k) 
+donde `m` es el número de objetos del primer tipo, `n` el número de objetos del segundo tipo y `k` el número de extracciones realizadas.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.hypergeom`: 
+- pmf(k,M, n, N)
+- cdf(k,M, n, N)
+- ppf(q,M, n, N)
+- rvs(M, n, N, size) 
+donde `M` es el número de objetos del primer tipo, `N` el número de objetos del segundo tipo y `n` el número de extracciones realizadas.
+
+### Ejemplo
+Supongamos que tenemos 20 animales, de los cuales 7 son perros.
+Queremos medir la probabilidad de encontrar un numero determinado de perros si elegimos $x=12$ animales al azar.
+
+```{r}
+library(Rlab)
+M = 7
+N = 13
+k = 12
+dhyper(x = 0:12, m = M, n = N, k = k)
+phyper(q = 0:12, m = M, n = N, k = k)
+qhyper(p = 0.5, m = M, n = N, k = k)
+rhyper(nn = 1000, m = M, n = N, k = k) -> data
+hist(data, breaks = 8)
+```
+
+
+
+

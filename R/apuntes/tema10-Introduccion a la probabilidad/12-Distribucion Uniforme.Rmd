@@ -1,0 +1,79 @@
+---
+title: "12-Distribucion Uniforme"
+author: "Adrian"
+date: "25/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion Uniforme
+Una v.a. continua $X$ tiene distribución uniforme sobre el intervalo real $[a,b]$ con $a<b$, $X\sim\text{U}(a,b)$ si su función de densidad es $$f_X(x)=\left\{
+\begin{array}{rl}
+     \frac{1}{b-a} & \text{si } a\le x\le b
+  \\ 0 & \text{en cualquier otro caso}
+\end{array}
+\right.$$
+
+Modela el elegir un elemento del intervalo $[a,b]$ de manera equiprobable
+
+- El **dominio** de $X$ será $D_X = [a,b]$
+
+- La **función de distribución** vendrá dada por $$F_X(x)=\left\{
+\begin{array}{rl}
+    0 & \text{si } x<a
+  \\ \frac{x-a}{b-a} & \text{si } a\le x< b
+  \\ 1 & \text{si } x\ge b
+\end{array}
+\right.$$
+
+- **Esperanza** $E(X) = \frac{a+b}{2}$
+
+- **Varianza** $Var(X) = \frac{(b-a)^2}{12}$
+
+### Representacion Grafica
+
+```{r, echo = FALSE}
+par(mfrow=c(1,2))
+plot(c(0,1,1:4,4,5), c(0,0,dunif(1:4,min = 1, max = 4),0,0),col = "purple", xlab = "", ylab = "", main = "Función de densidad de una U(1,4)", type = "o", ylim = c(0,1))
+plot(0:5, punif(0:5,min = 1, max = 4),col = "purple", xlab = "", ylab = "", main = "Función de distribución de una U(1,4)", type = "o")
+par(mfrow=c(1,1))
+```
+
+
+### Paqueteria
+- En `R` tenemos las funciones del paquete `stats`: 
+- dunif(x, min, max)
+- punif(q, min, max)
+- qunif(p, min, max)
+- runif(n,  min, max) 
+donde `min` y `max` són los extremos de los intervalos de la distribución uniforme.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.uniform`: 
+- pdf(k,loc, scale)
+- cdf(k,loc, scale)
+- ppf(q,loc, scale)
+- rvs(n,loc, scaler)
+donde la distribución uniforme está definida en el intervalo `[loc, loc+scale]`.
+
+### Ejemplo
+Supongamos que $X\sim U([0, 1])$ entonces podemos estudiar sus parametros
+
+```{r}
+a = 0
+b = 1
+
+x = seq(-0.1, 1.1, 0.1)
+
+plot(x, dunif(x, min = a, max = b))
+
+plot(x, punif(x, a, b), type = "l")
+
+qunif(0.5, a, b)
+qunif(0.25, a, b)
+
+runif(100000, a, b) -> data
+hist(data)
+```

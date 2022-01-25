@@ -1,0 +1,59 @@
+---
+title: "13-Distribucion exponencial"
+author: "Adrian"
+date: "25/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribución Exponencial
+Una v.a. $X$ tiene distribución exponencial de parámetro $\lambda$, $X\sim\text{Exp}(\lambda)$, si su función de densidad es $$f_X(x)=\left\{
+\begin{array}{rl}
+     0 & \text{si }  x\le 0
+  \\ \lambda\cdot e^{-\lambda x} & \text{si }x>0
+\end{array}
+\right.$$
+
+- **Teorema.** Si tenemos un proceso de Poisson de parámetro $\lambda$ por unidad de tiempo, el tiempo que pasa entre dos sucesos consecutivos es una v.a. $\text{Exp}(\lambda)$ 
+
+- **Propiedad de la pérdida de memoria.** Si $X$ es v.a. $\text{Exp}(\lambda)$, entonces $$p(X>s+t\ :\ X>s)=p(X>t)\ \forall s,t>0$$
+
+- El **dominio** de $X$ será $D_X = [0,\infty)$
+
+- La **función de distribución** vendrá dada por $$F_X(x)=\left\{
+\begin{array}{rl}
+    0 & \text{si } x\le 0
+  \\ 1-e^{-\lambda x} & \text{si } x>0
+\end{array}
+\right.$$
+
+- **Esperanza** $E(X) = \frac{1}{\lambda}$
+
+- **Varianza** $Var(X) = \frac{1}{\lambda^2}$
+
+### Representacion Grafica
+
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+plot(0:20, dexp(0:20,0.2),col = "purple", xlab = "", ylab = "", main = "Función de densidad de una Exp(0.2)", type = "o")
+plot(0:20, pexp(0:20,0.2),col = "purple", xlab = "", ylab = "", main = "Función de distribución de una Exp(0.2)", type = "o", ylim = c(0,1))
+par(mfrow = c(1,1))
+```
+
+
+## Paqueteria
+- En `R` tenemos las funciones del paquete `stats`: 
+- dexp(x, rate)
+- pexp(q, rate)
+- qexp(p, rate)
+- rexp(n,  rate)
+donde `rate`$=\lambda$ es el tiempo entre dos sucesos consecutivos de la distribución.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.expon`: - pdf(k, scale)
+- cdf(k, scale)
+- ppf(q, scale)
+- rvs(n, scaler)
+donde `scale`$=1/\lambda$ es la inversa del tiempo entre dos sucesos consecutivos de la distribución.

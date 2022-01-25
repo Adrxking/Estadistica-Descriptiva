@@ -1,0 +1,94 @@
+---
+title: "09-Distribucion de Poisson"
+author: "Adrian"
+date: "25/1/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distribucion de Poisson
+Si X es v.a. que mide el "numero de eventos en un cierto intervalo de tiempo", diremos que X se distribuye como una Poisson con parametro $\lambda$
+
+$$X \sim Po(\lambda)$$
+donde $\lambda$ representa el numero de veces que se espera que ocurra el evento durante un intervalo dado
+
+- El **dominio** de $X$ será $D_X = \{0,1,2,\dots\}$
+
+- La **función de probabilidad** vendrá dada por $$f(k) = \frac{e^{-\lambda}\lambda^k}{k!}$$
+
+- La **función de distribución** vendrá dada por $$F(x) = \left\{
+\begin{array}{cl}
+     0 & \text{si } x<0 
+  \\ \sum_{k=0}^xf(k) & \text{si } 0\le x<n
+  \\ 1 & \text{si } x\ge n
+\end{array}
+\right.$$ 
+
+- **Esperanza** $E(X) = \lambda$
+
+- **Varianza** $Var(X) = \lambda$
+
+
+### Paqueteria
+- En `R` tenemos las funciones del paquete `Rlab`: 
+- dpois(x, lambda)
+- ppois(q,lambda)
+- qpois(p,lambda)
+- rpois(n, lambda)
+donde `lambda` es el número esperado de eventos por unidad de tiempo de la distribución.
+
+- En `Python` tenemos las funciones del paquete `scipy.stats.poisson`: 
+- pmf(k,mu)
+- cdf(k,mu)
+- ppf(q,mu)
+- rvs(M,mu)
+donde `mu` es el número esperado de eventos por unidad de tiempo de la distribución.
+
+
+### Ejemplo
+
+supogamos que $X$ modela el numero de errores por pagina que tiene un valor esperado $\lambda = 5$.
+
+```{r}
+# lambda
+l = 5
+
+# Probabilidad de distribucion de 0 a 10 errores
+dpois(x = 0:10, lambda = l)
+
+plot(0:10, dpois(x = 0:10, lambda = l))
+
+# Distribucion de probabilidad acumulada
+ppois(0:20, l)
+
+qpois(0.5, 5)
+
+rpois(1000, lambda = l) -> data
+
+hist(data)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
