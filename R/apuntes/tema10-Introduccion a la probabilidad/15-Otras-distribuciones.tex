@@ -1,0 +1,174 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{15-Otras distribuciones}
+\author{Adrian}
+\date{25/1/2022}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={15-Otras distribuciones},
+  pdfauthor={Adrian},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{otras-distribuciones-importantes}{%
+\subsubsection{Otras distribuciones
+importantes}\label{otras-distribuciones-importantes}}
+
+\begin{itemize}
+\tightlist
+\item
+  La distribución \(\chi^2_k\), donde \(k\) representa los grados de
+  libertad de la misma y que procede de la suma de los cuadrados de
+  \(k\) distribuciones normales estándar independientes:
+\end{itemize}
+
+\[X = Z_1^2 + Z_2^2+\cdots + Z_k^2\sim \chi_k^2\]
+
+\hypertarget{otras-distribuciones-importantes-1}{%
+\subsubsection{Otras distribuciones
+importantes}\label{otras-distribuciones-importantes-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  La distribución \(t_k\) surge del problema de estimar la media de una
+  población normalmente distribuida cuando el tamaño de la muestra es
+  pequeña y procede del cociente
+\end{itemize}
+
+\[T = \frac{Z}{\sqrt{\chi^2_k/k}}\sim T_k\]
+
+\hypertarget{otras-distribuciones-importantes-2}{%
+\subsubsection{Otras distribuciones
+importantes}\label{otras-distribuciones-importantes-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  La distribución \(F_{n_1,n_2}\) aparece frecuentemente como la
+  distribución nula de una prueba estadística, especialmente en el
+  análisis de varianza. Viene definida como el cociente
+\end{itemize}
+
+\[F = \frac{\chi^2_{n_1}/n_1}{\chi^2_{n_2}/n_2}\sim F_{n_1,n_2}\]
+
+\hypertarget{distribuciones-continuas-en-r}{%
+\subsubsection{Distribuciones continuas en
+R}\label{distribuciones-continuas-en-r}}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Distribución & Instrucción en R & Instrucción en Python & Parámetros \\
+\midrule
+\endhead
+Uniforme & \texttt{unif} & \texttt{scipy.stats.uniform} & mínimo y
+máximo \\
+Exponencial & \texttt{exp} & \texttt{scipy.stats.expon} & \(\lambda\) \\
+Normal & \texttt{norm} & \texttt{scipy.stats.normal} & media \(\mu\),
+desviación típica \(\sigma\) \\
+Khi cuadrado & \texttt{chisq} & \texttt{scipy.stats.chi2} & grados de
+libertad \\
+t de Student & \texttt{t} & \texttt{scipy.stats.t} & grados de
+libertad \\
+F de Fisher & \texttt{f} & \texttt{scipy.stats.f} & los dos grados de
+libertad \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{otras-distribuciones-conocidas}{%
+\subsection{Otras distribuciones
+conocidas}\label{otras-distribuciones-conocidas}}
+
+\begin{itemize}
+\tightlist
+\item
+  Distribución de Pareto (Power Law)
+\item
+  Distribución Gamma y Beta
+\item
+  Distribución Log Normal
+\item
+  Distribución de Weibull
+\item
+  Distribución de Cauchy
+\item
+  Distribución Exponencial Normal
+\item
+  Distribución Von Mises
+\item
+  Distribución Rayleigh
+\item
+  \ldots{}
+\end{itemize}
+
+\end{document}
