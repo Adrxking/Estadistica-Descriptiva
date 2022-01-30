@@ -1,0 +1,67 @@
+---
+title: "03-Analisis de vuelos con Python"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+#py_install("pandas")
+#py_install("numpy")
+#py_install("matplotlib")
+#py_install("plotnine")
+#install.packages("nycflights13")
+```
+
+# Vuelos en NYC
+
+```{r}
+data <- nycflights13::flights
+head(data)
+```
+
+## Filtro de datos con tidyverse
+```{python}
+pydata = r.data
+pydata = pydata[pydata["dest"]=="ORD"]
+pydata = pydata[["carrier", "dep_delay", "arr_delay", "origin"]]
+# Eliminar outliers
+pydata = pydata[pydata["arr_delay"]<6*60]
+pydata = pydata.dropna()
+
+print(pydata.head())
+```
+
+## Obtener los retrasos de los vuelos hacia Orlanda desde NYC
+```{r}
+summary(py$pydata)
+boxplot(arr_delay~origin, data = py$pydata, main = "Retrasos de los vuelos por origen")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
